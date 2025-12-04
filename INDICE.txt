@@ -1,0 +1,313 @@
+╔══════════════════════════════════════════════════════════════════╗
+║               ÍNDICE DE ARCHIVOS DEL PROYECTO                    ║
+║                    JUEGO HEX - MONTE CARLO                       ║
+╚══════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS DE CÓDIGO FUENTE (*.c, *.h)                            │
+└──────────────────────────────────────────────────────────────────┘
+
+📄 hex_game.h (1.8K)
+   ├─ Propósito: Definiciones, estructuras y prototipos
+   ├─ Contiene:
+   │  • Definiciones de constantes del juego
+   │  • Estructuras: board_t, coord_t, stats_t, thread_args_t
+   │  • Prototipos de todas las funciones
+   └─ Incluido por: Todos los .c del proyecto
+
+📄 hex_game.c (4.8K)
+   ├─ Propósito: Motor principal del juego
+   ├─ Funciones principales:
+   │  • board_init() - Inicializar tablero
+   │  • board_make_move() - Ejecutar movimiento
+   │  • board_check_winner() - Detectar ganador con DFS
+   │  • board_is_valid_move() - Validar movimientos
+   │  • board_get_empty_cells() - Obtener celdas disponibles
+   └─ Algoritmos: DFS para conectividad hexagonal
+
+📄 hex_ai.c (7.3K)
+   ├─ Propósito: Inteligencia artificial con Monte Carlo
+   ├─ Funciones principales:
+   │  • ai_best_move() - Función principal de decisión
+   │  • monte_carlo_worker() - Worker thread paralelo
+   │  • run_simulations() - Ejecutar N simulaciones
+   │  • simulate_random_game() - Simular una partida
+   └─ Características: Paralelización con pthreads
+
+📄 hex_gui.c (9.5K)
+   ├─ Propósito: Interfaz gráfica con raylib
+   ├─ Funciones principales:
+   │  • main() - Loop principal del juego
+   │  • draw_board() - Renderizar tablero
+   │  • draw_hexagon() - Dibujar hexágonos
+   │  • pixel_to_hex() - Conversión coordenadas
+   │  • hex_to_pixel() - Conversión coordenadas
+   │  • draw_ui() - Panel de información
+   └─ Interacción: Mouse, teclado, eventos
+
+📄 hex_console.c (4.7K)
+   ├─ Propósito: Interfaz de consola (alternativa sin GUI)
+   ├─ Funciones principales:
+   │  • main() - Loop del juego en consola
+   │  • parse_move() - Interpretar jugadas (A1, B2, etc.)
+   └─ Ventajas: No requiere raylib, útil para debugging
+
+📄 pcg_basic.h (404B)
+   ├─ Propósito: Header del generador PCG32
+   ├─ Contiene:
+   │  • Estructura pcg32_random_t
+   │  • Prototipos de funciones PCG
+   └─ Nota: Generador de números aleatorios thread-safe
+
+📄 pcg_basic.c (840B)
+   ├─ Propósito: Implementación del generador PCG32
+   ├─ Funciones:
+   │  • pcg32_srandom_r() - Inicializar con seed
+   │  • pcg32_random_r() - Generar número aleatorio
+   │  • pcg32_boundedrand_r() - Número en rango
+   └─ Calidad: Excelente, period 2^64
+
+┌──────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS DE COMPILACIÓN Y SCRIPTS                               │
+└──────────────────────────────────────────────────────────────────┘
+
+📄 Makefile (2.7K)
+   ├─ Propósito: Sistema de compilación
+   ├─ Targets principales:
+   │  • all - Compilar todo
+   │  • clean - Limpiar archivos
+   │  • run - Ejecutar GUI
+   │  • run-console - Ejecutar consola
+   │  • run-fast - Ejecutar con más threads
+   │  • run-test - Prueba rápida
+   │  • help - Mostrar ayuda
+   └─ Uso: make [target]
+
+📄 install.sh (3.0K) [Ejecutable]
+   ├─ Propósito: Instalación automática
+   ├─ Funciones:
+   │  • Detectar distribución (Fedora/Ubuntu)
+   │  • Verificar dependencias
+   │  • Instalar paquetes necesarios
+   │  • Compilar proyecto
+   └─ Uso: ./install.sh
+
+📄 test.sh (4.2K) [Ejecutable]
+   ├─ Propósito: Pruebas automatizadas
+   ├─ Tests incluidos:
+   │  • Verificación de archivos
+   │  • Compilación
+   │  • Ejecutables
+   │  • Funcionalidad básica
+   │  • Paralelismo
+   │  • IA
+   │  • Memory leaks (valgrind)
+   │  • Rendimiento
+   │  • Documentación
+   │  • Ayuda
+   └─ Uso: ./test.sh
+
+📄 .gitignore (307B)
+   ├─ Propósito: Control de versiones git
+   └─ Ignora: Ejecutables, *.o, logs, backups
+
+┌──────────────────────────────────────────────────────────────────┐
+│ DOCUMENTACIÓN (*.md, *.txt)                                      │
+└──────────────────────────────────────────────────────────────────┘
+
+📄 README.md (6.0K)
+   ├─ Propósito: Manual de usuario principal
+   ├─ Secciones:
+   │  • Descripción del juego HEX
+   │  • Compilación e instalación
+   │  • Ejecución y opciones
+   │  • Controles
+   │  • Arquitectura del código
+   │  • Algoritmo Monte Carlo
+   │  • Rendimiento y escalabilidad
+   │  • Estrategia de IA
+   │  • Detección de ganador
+   │  • Mejoras posibles
+   │  • Créditos
+   └─ Audiencia: Usuarios finales, evaluadores
+
+📄 REPORTE.md (12K)
+   ├─ Propósito: Reporte técnico completo
+   ├─ Secciones:
+   │  • Introducción
+   │  • Arquitectura del sistema
+   │  • Algoritmo Monte Carlo
+   │  • Implementación del paralelismo
+   │  • Detección de ganador
+   │  • Análisis de rendimiento
+   │  • Pruebas y validación
+   │  • Interfaz gráfica
+   │  • Compilación y uso
+   │  • Conclusiones
+   │  • Referencias
+   │  • Anexo con código clave
+   └─ Audiencia: Profesor, evaluación técnica
+
+📄 PRESENTACION.md (8.4K)
+   ├─ Propósito: Guía para presentación oral
+   ├─ Contenido:
+   │  • Preparación antes de presentar
+   │  • Estructura de 15-20 minutos
+   │  • Diapositivas sugeridas
+   │  • Puntos clave por tema
+   │  • Demo en vivo
+   │  • Preguntas frecuentes
+   │  • Checklist pre-presentación
+   │  • Comandos útiles
+   │  • Plan de backup
+   │  • Consejos finales
+   └─ Audiencia: Presentador (tú)
+
+📄 RESUMEN.txt (13K)
+   ├─ Propósito: Resumen ejecutivo visual
+   ├─ Contenido:
+   │  • Estructura completa del proyecto
+   │  • Características implementadas
+   │  • Inicio rápido
+   │  • Configuración recomendada
+   │  • Métricas del proyecto
+   │  • Arquitectura técnica
+   │  • Algoritmo detallado
+   │  • Testing
+   │  • Convenciones de estilo
+   │  • Dependencias
+   │  • Notas para presentación
+   │  • Mejoras futuras
+   └─ Audiencia: Vista general rápida
+
+📄 INICIO_RAPIDO.txt (7.4K)
+   ├─ Propósito: Guía de inicio express
+   ├─ Contenido:
+   │  • Instalación en 3 pasos
+   │  • Comandos útiles
+   │  • Controles del juego
+   │  • Estructura de archivos
+   │  • Opciones de configuración
+   │  • Solución de problemas
+   │  • Verificación con test.sh
+   │  • Métricas de rendimiento
+   │  • Preparación para presentación
+   └─ Audiencia: Inicio rápido sin leer todo
+
+┌──────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS GENERADOS AL COMPILAR (no incluidos en proyecto)       │
+└──────────────────────────────────────────────────────────────────┘
+
+🔧 hex (ejecutable)
+   └─ Versión con interfaz gráfica (raylib)
+
+🔧 hex_console (ejecutable)
+   └─ Versión de consola (sin GUI)
+
+🔧 *.o (archivos objeto)
+   ├─ hex_game.o
+   ├─ hex_ai.o
+   ├─ hex_gui.o
+   ├─ hex_console.o
+   └─ pcg_basic.o
+
+┌──────────────────────────────────────────────────────────────────┐
+│ FLUJO DE LECTURA RECOMENDADO                                     │
+└──────────────────────────────────────────────────────────────────┘
+
+PARA USAR EL PROGRAMA:
+   1. INICIO_RAPIDO.txt      ← Empezar aquí
+   2. README.md              ← Manual completo
+   3. Ejecutar: ./install.sh
+
+PARA ENTENDER EL CÓDIGO:
+   1. hex_game.h             ← Estructuras
+   2. hex_game.c             ← Motor del juego
+   3. hex_ai.c               ← IA paralela
+   4. hex_gui.c o hex_console.c ← Interfaces
+
+PARA LA PRESENTACIÓN:
+   1. PRESENTACION.md        ← Guía completa
+   2. RESUMEN.txt            ← Vista general
+   3. REPORTE.md             ← Detalles técnicos
+
+PARA EVALUACIÓN:
+   1. REPORTE.md             ← Documento principal
+   2. README.md              ← Uso y arquitectura
+   3. Código fuente          ← Implementación
+
+┌──────────────────────────────────────────────────────────────────┐
+│ ESTADÍSTICAS DEL PROYECTO                                        │
+└──────────────────────────────────────────────────────────────────┘
+
+CÓDIGO FUENTE:
+   • Archivos C: 5 (hex_game.c, hex_ai.c, hex_gui.c, 
+                    hex_console.c, pcg_basic.c)
+   • Archivos H: 2 (hex_game.h, pcg_basic.h)
+   • Total líneas de código: ~1,200
+
+DOCUMENTACIÓN:
+   • Archivos markdown: 3 (README, REPORTE, PRESENTACION)
+   • Archivos texto: 2 (RESUMEN, INICIO_RAPIDO)
+   • Total líneas documentación: ~800
+
+SCRIPTS:
+   • Makefile: 1
+   • Shell scripts: 2 (install.sh, test.sh)
+   • Total líneas scripts: ~200
+
+TOTAL PROYECTO:
+   • Archivos: 15
+   • Líneas totales: ~2,200
+   • Tamaño: ~70KB
+
+┌──────────────────────────────────────────────────────────────────┐
+│ DEPENDENCIAS ENTRE ARCHIVOS                                      │
+└──────────────────────────────────────────────────────────────────┘
+
+hex_gui.c
+   ├── incluye → hex_game.h
+   └── usa → raylib
+
+hex_console.c
+   └── incluye → hex_game.h
+
+hex_ai.c
+   ├── incluye → hex_game.h
+   ├── incluye → pcg_basic.h
+   └── usa → pthread
+
+hex_game.c
+   └── incluye → hex_game.h
+
+pcg_basic.c
+   └── incluye → pcg_basic.h
+
+┌──────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS ESENCIALES (mínimo para compilar)                       │
+└──────────────────────────────────────────────────────────────────┘
+
+OBLIGATORIOS:
+   ✓ hex_game.h
+   ✓ hex_game.c
+   ✓ hex_ai.c
+   ✓ pcg_basic.h
+   ✓ pcg_basic.c
+   ✓ Makefile
+
+INTERFACES (al menos uno):
+   ✓ hex_gui.c (requiere raylib)
+     o
+   ✓ hex_console.c (no requiere raylib)
+
+RECOMENDADOS:
+   ✓ README.md
+   ✓ install.sh
+   ✓ test.sh
+
+╔══════════════════════════════════════════════════════════════════╗
+║                     PROYECTO COMPLETO                            ║
+║                                                                  ║
+║  Todos los archivos están documentados y listos para usar.      ║
+║  Comienza con INICIO_RAPIDO.txt para compilar y ejecutar.       ║
+╚══════════════════════════════════════════════════════════════════╝

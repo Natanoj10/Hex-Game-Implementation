@@ -1,0 +1,180 @@
+═══════════════════════════════════════════════════════════
+           GUÍA RÁPIDA - PROYECTO HEX
+═══════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────┐
+│ INSTALACIÓN EN 3 PASOS                                  │
+└─────────────────────────────────────────────────────────┘
+
+1. INSTALAR DEPENDENCIAS
+
+   Fedora:
+   $ sudo dnf install gcc make raylib-devel
+
+   Ubuntu:
+   $ sudo apt install gcc make libraylib-dev
+
+   O usa el instalador automático:
+   $ chmod +x install.sh
+   $ ./install.sh
+
+
+2. COMPILAR
+
+   $ make
+
+
+3. EJECUTAR
+
+   $ ./hex -t 4 -s 1000
+
+┌─────────────────────────────────────────────────────────┐
+│ COMANDOS ÚTILES                                         │
+└─────────────────────────────────────────────────────────┘
+
+# Ver todas las opciones
+$ make help
+
+# Versión consola (sin GUI)
+$ ./hex_console -t 4 -s 1000
+
+# Prueba rápida
+$ make run-test
+
+# Juego normal
+$ make run
+
+# Máxima potencia
+$ make run-fast
+
+# Tests automáticos
+$ ./test.sh
+
+┌─────────────────────────────────────────────────────────┐
+│ CONTROLES DEL JUEGO                                     │
+└─────────────────────────────────────────────────────────┘
+
+GUI:
+   • Click izquierdo: Colocar ficha
+   • R: Reiniciar
+   • ESC: Salir
+
+Consola:
+   • Escribir jugada: A1, B2, K11, etc.
+   • quit: Salir
+
+┌─────────────────────────────────────────────────────────┐
+│ ESTRUCTURA DE ARCHIVOS                                  │
+└─────────────────────────────────────────────────────────┘
+
+CÓDIGO FUENTE:
+   hex_game.h/c     - Motor del juego
+   hex_ai.c         - IA Monte Carlo
+   hex_gui.c        - Interfaz gráfica
+   hex_console.c    - Interfaz consola
+   pcg_basic.h/c    - Generador aleatorio
+
+COMPILACIÓN:
+   Makefile         - Sistema de compilación
+   install.sh       - Instalador automático
+
+DOCUMENTACIÓN:
+   README.md        - Manual completo
+   REPORTE.md       - Reporte técnico
+   PRESENTACION.md  - Guía de presentación
+   RESUMEN.txt      - Resumen ejecutivo
+
+TESTING:
+   test.sh          - Pruebas automáticas
+
+┌─────────────────────────────────────────────────────────┐
+│ OPCIONES DE CONFIGURACIÓN                               │
+└─────────────────────────────────────────────────────────┘
+
+-t <threads>        Número de threads (1-32, default: 4)
+-s <simulaciones>   Simulaciones por thread (default: 1000)
+
+Ejemplos:
+   $ ./hex -t 2 -s 100      # Rápido (para pruebas)
+   $ ./hex -t 4 -s 1000     # Normal
+   $ ./hex -t 8 -s 2000     # Potente
+   $ ./hex -t 16 -s 5000    # Muy potente (lento)
+
+┌─────────────────────────────────────────────────────────┐
+│ SOLUCIÓN DE PROBLEMAS                                   │
+└─────────────────────────────────────────────────────────┘
+
+ERROR: "raylib not found"
+   → Instala raylib-devel (Fedora) o libraylib-dev (Ubuntu)
+
+ERROR: "pthread not found"
+   → Instala glibc-devel
+
+ERROR: Compilación falla
+   → Verifica que tienes GCC: gcc --version
+   → Ejecuta: make clean && make
+
+ERROR: GUI no funciona
+   → Usa la versión consola: ./hex_console
+
+LENTO: IA tarda mucho
+   → Reduce threads o simulaciones: ./hex -t 2 -s 100
+
+┌─────────────────────────────────────────────────────────┐
+│ VERIFICACIÓN                                            │
+└─────────────────────────────────────────────────────────┘
+
+Verifica que todo funciona:
+   $ ./test.sh
+
+Debe mostrar:
+   ✓ Archivos fuente completos
+   ✓ Compilación exitosa
+   ✓ Ejecutables generados
+   ✓ Ejecución de consola funcional
+   ✓ Threads configurados correctamente
+   ✓ IA genera movimientos
+   ... etc ...
+
+┌─────────────────────────────────────────────────────────┐
+│ MÉTRICAS DE RENDIMIENTO                                 │
+└─────────────────────────────────────────────────────────┘
+
+Tiempos aproximados por turno de IA:
+
+   1 thread,  1000 sims → ~12s
+   2 threads, 1000 sims → ~6s   (2.0x)
+   4 threads, 1000 sims → ~3s   (4.0x)
+   8 threads, 1000 sims → ~1.5s (8.0x)
+
+┌─────────────────────────────────────────────────────────┐
+│ PARA PRESENTACIÓN                                       │
+└─────────────────────────────────────────────────────────┘
+
+PREPARACIÓN:
+   1. Compila antes: make clean && make
+   2. Prueba que funciona: ./hex -t 2 -s 100
+   3. Lee PRESENTACION.md para guía completa
+
+DEMO RECOMENDADA:
+   $ ./hex -t 4 -s 1000
+
+   • Explica reglas mientras carga
+   • Haz 2-3 movimientos
+   • Muestra terminal con estadísticas de IA
+   • Reinicia con R
+
+BACKUP:
+   Si GUI falla, usa consola:
+   $ ./hex_console -t 4 -s 1000
+
+═══════════════════════════════════════════════════════════
+            ¡TODO LISTO PARA USAR!
+═══════════════════════════════════════════════════════════
+
+Para más información:
+   • README.md - Manual de usuario
+   • REPORTE.md - Detalles técnicos
+   • PRESENTACION.md - Guía de presentación
+
+¡Buena suerte con el proyecto!
